@@ -57,6 +57,11 @@ function resizeElementProportionally(proportion, element, ...attributes) {
             if (isNaN(valueInPx) || valueInPx == 0) {
                 continue;
             }
+            let minValueOfAttr = element.attr(`min-${attribute}`);
+            if (minValueOfAttr && (+(minValueOfAttr.replace(/\px/g, '').trim())).toFixed(0) > valueInPx) {
+                element.css(attribute, minValueOfAttr + 'px');
+                return;
+            }
             let actualPxToBe = valueInPx * proportion;
             element.css(attribute, actualPxToBe + 'px');
             setNodeProportionalValueToSessionStorage(selectorUniqueID, attribute, actualPxToBe + "px");
