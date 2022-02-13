@@ -56,30 +56,35 @@ class Timer {
         return this.overallTime;
     }
 
-    function formatTime(timeInSeconds) {
+    formatTime(timeInSeconds) {
         if (timeInSeconds < 60) {
-            return getTimeFormattedForSecs(timeInSeconds);
-        } else if (timeInSeconds < 60 * 60) {
-            return getTimeFormattedForMinutes(timeInSeconds);
-        } else if (timeInSeconds < 60 * 60 * 60) {
+            return this.getTimeFormattedForSecs(timeInSeconds);
+        }
 
+        else if (timeInSeconds < 60 * 60) {
+            return this.getTimeFormattedForMinutes(timeInSeconds);
+        }
+
+        else if (timeInSeconds < 60 * 60 * 60) {
+            this.getTimeFormattedForHours(timeInSeconds);
         }
     }
 
-    function getTimeFormattedForSecs(secs) {
+    getTimeFormattedForSecs(secs) {
         return `${secs} secs`;
     }
 
-    function getTimeFormattedForMinutes(timeInSeconds) {
+    getTimeFormattedForMinutes(timeInSeconds) {
         let minutes = Math.floor(timeInSeconds / 60);
         let seconds = (timeInSeconds - (minutes * 60));
-        return `${minutes} mins ${getTimeFormattedForSecs(seconds)}`;
+        return `${minutes} mins ${this.getTimeFormattedForSecs(seconds)}`;
     }
 
-    function getTimeFormattedForHours(timeInSeconds) {
+    getTimeFormattedForHours(timeInSeconds) {
         let hours = Math.floor(timeInSeconds / (60 * 60));
         let remainingSeconds = timeInSeconds - (hours * 60);
-        return `${hours} hrs ${getTimeFormattedForMinutes(remainingSeconds)}`;
+        return `${hours} hrs ${this.getTimeFormattedForMinutes(remainingSeconds)}`;
     }
-
 }
+
+export default Timer;
